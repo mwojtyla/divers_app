@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class UserServiceFacade {
         return userMapper.mapToUserDto(user);
     }
 
-    public void createUser(UserDto userDto) throws UserNotFoundException {
+    public void createUser(UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
         userDbService.saveUser(user);
     }
@@ -88,6 +89,18 @@ public class UserServiceFacade {
     public Long getUserIdByLoginAndPassword(String login, String password) {
         Optional<User> user = userDbService.getUserByLoginAndPassword(login, password);
         return user.get().getId();
+    }
+
+    public boolean isLoginAvailable(String login) {
+         List<User> users = userDbService.getAllUsers();
+         long amountOfLogin = users.stream()
+                 .filter(u->u.getLogin().equals(login))
+                 .count();
+         if (amountOfLogin == 0) {
+                return true;
+            } else {
+             return false;
+         }
     }
 }
 

@@ -51,6 +51,19 @@ public class UserControllerTests {
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
+    @Test
+    void shouldReturnFalseWhenLoginIsNotAvailable() throws Exception {
+        // Given
+        String login = "lilyevans";
+
+        when(userServiceFacade.isLoginAvailable(login)).thenReturn(false);
+        // When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/diver/user/loginVerification/lilyevans")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200));
+    }
 
     @Test
     void shouldGetUserByUserId() throws Exception {

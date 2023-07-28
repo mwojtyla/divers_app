@@ -20,6 +20,11 @@ public class UserController {
         return ResponseEntity.ok(userServiceFacade.isUserAuthorised(login, password));
     }
 
+    @GetMapping("/loginVerification/{login}")
+    public ResponseEntity<Boolean> isLoginAvailable(@PathVariable String login) {
+        return ResponseEntity.ok(userServiceFacade.isLoginAvailable(login));
+    }
+
     @GetMapping("{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long userId) throws UserNotFoundException {
         return ResponseEntity.ok(userServiceFacade.getUser(userId));
@@ -31,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) throws UserNotFoundException {
+    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
         userServiceFacade.createUser(userDto);
         return ResponseEntity.ok().build();
     }
