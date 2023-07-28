@@ -25,13 +25,13 @@ public class DiversLogController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createDiversLog(@RequestBody DiversLogDto diversLogDto) throws UserNotFoundException, DivingBaseNotFoundException {
+    public ResponseEntity<Void> createDiversLog(@RequestBody DiversLogDto diversLogDto) throws UserNotFoundException {
         diversLogServiceFacade.createDiversLog(diversLogDto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateDiversLog(@RequestBody DiversLogDto diversLogDto) throws UserNotFoundException, DivingBaseNotFoundException {
+    public ResponseEntity<Void> updateDiversLog(@RequestBody DiversLogDto diversLogDto) throws UserNotFoundException {
         diversLogServiceFacade.updateDiversLog(diversLogDto);
         return ResponseEntity.ok().build();
     }

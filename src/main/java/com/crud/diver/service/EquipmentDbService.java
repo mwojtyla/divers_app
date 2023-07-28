@@ -26,7 +26,7 @@ public class EquipmentDbService {
         equipmentRepository.deleteById(id);
     }
 
-    public Optional<Equipment> getEquipmentIdByNameAndUserId(final String name, final Long userId) {
+    public Optional<Equipment> getEquipmentByNameAndUserId(final String name, final Long userId) {
         return equipmentRepository.findByNameAndUserId(name, userId);
     }
 }

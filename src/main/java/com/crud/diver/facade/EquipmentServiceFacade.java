@@ -41,7 +41,7 @@ public class EquipmentServiceFacade {
     }
 
     public Long getEquipmentIdByNameAndUserId(String name, Long userId) {
-        Optional<Equipment> equipment = equipmentDbService.getEquipmentIdByNameAndUserId(name, userId);
+        Optional<Equipment> equipment = equipmentDbService.getEquipmentByNameAndUserId(name, userId);
         return equipment.get().getId();
     }
 }

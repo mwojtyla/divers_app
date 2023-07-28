@@ -2,7 +2,6 @@ package com.crud.diver.facade;
 
 import com.crud.diver.domain.DiversLog;
 import com.crud.diver.domain.DiversLogDto;
-import com.crud.diver.exception.DivingBaseNotFoundException;
 import com.crud.diver.exception.UserNotFoundException;
 import com.crud.diver.mapper.DiversLogMapper;
 import com.crud.diver.service.DiversLogDbService;
@@ -25,13 +24,13 @@ public class DiversLogServiceFacade {
         return diversLogMapper.mapToDiversLogDtoList(diversLogList);
     }
 
-    public void createDiversLog(DiversLogDto diversLogDto) throws UserNotFoundException, DivingBaseNotFoundException {
+    public void createDiversLog(DiversLogDto diversLogDto) throws UserNotFoundException {
         DiversLog diversLog = diversLogMapper.mapToDiversLog(diversLogDto);
         userDbService.getUserById(diversLogDto.getUserId()).getDiversLogs().add(diversLog);
         diversLogDbService.saveDiversLog(diversLog);
     }
 
-    public void updateDiversLog(DiversLogDto diversLogDto) throws UserNotFoundException, DivingBaseNotFoundException {
+    public void updateDiversLog(DiversLogDto diversLogDto) throws UserNotFoundException {
         DiversLog diversLog = diversLogMapper.mapToDiversLog(diversLogDto);
         DiversLog savedDiversLog = diversLogDbService.saveDiversLog(diversLog);
         diversLogMapper.mapToDiversLogDto(savedDiversLog);
